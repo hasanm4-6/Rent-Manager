@@ -13,7 +13,15 @@ export default defineConfig(({ mode }) => {
     server: {
       open: true,
       port: PORT,
-      host: true
+      host: true,
+      proxy: {
+        '/api': {
+          target: 'https://dcr.api.rentmanager.com',
+          changeOrigin: true,
+          secure: false, // disable SSL verification (optional)
+          rewrite: (path) => path.replace(/^\/api/, '')
+        }
+      }
     },
     preview: {
       open: true,

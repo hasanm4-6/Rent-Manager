@@ -7,6 +7,9 @@ import DashboardLayout from 'layout/Dashboard';
 // render- Dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/default')));
 
+// render - pages
+const Users = Loadable(lazy(() => import('pages/users/table')));
+
 // render - color
 const Color = Loadable(lazy(() => import('pages/component-overview/color')));
 const Typography = Loadable(lazy(() => import('pages/component-overview/typography')));
@@ -33,6 +36,10 @@ const MainRoutes = {
           element: <DashboardDefault />
         }
       ]
+    },
+    {
+      path: 'users',
+      element: <Users />
     },
     {
       path: 'typography',

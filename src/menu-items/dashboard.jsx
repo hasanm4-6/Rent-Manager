@@ -1,12 +1,15 @@
 // assets
 import { DashboardOutlined } from '@ant-design/icons';
+import { Users } from "lucide-react";
 
 // icons
 const icons = {
-  DashboardOutlined
+  DashboardOutlined,
+  Users
 };
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
+
 
 const dashboard = {
   id: 'group-dashboard',
@@ -26,7 +29,7 @@ const dashboard = {
       title: 'Users',
       type: 'item',
       url: '/users',
-      icon: icons.DashboardOutlined,
+      icon: icons.Users,
       breadcrumbs: false
     },
     {

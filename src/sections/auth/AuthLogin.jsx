@@ -49,7 +49,7 @@ export default function AuthLogin({ isDemo = false }) {
           password: Yup.string()
             .required('Password is required')
             .test('no-leading-trailing-whitespace', 'Password cannot start or end with spaces', (value) => value === value.trim())
-            .max(10, 'Password must be less than 10 characters'),
+            .max(24, 'Password must be less than 24 characters'),
           locationId: Yup.string().max(255)
         })}
         onSubmit={async (values, { setSubmitting }) => {

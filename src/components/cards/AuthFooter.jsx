@@ -15,33 +15,10 @@ export default function AuthFooter() {
       >
         <Typography variant="subtitle2" color="secondary">
           © Made with love by Team{' '}
-          <Link href="https://codedthemes.com/" target="_blank" underline="hover">
-            CodedThemes
+          <Link href="https://thesocialnexus.org/" target="_blank" underline="hover">
+            TSN
           </Link>
         </Typography>
-
-        <Stack direction={{ xs: 'column', sm: 'row' }} sx={{ gap: { xs: 1, sm: 3 }, textAlign: { xs: 'center', sm: 'inherit' } }}>
-          <Typography
-            variant="subtitle2"
-            color="secondary"
-            component={Link}
-            href="https://mui.com/store/terms/"
-            target="_blank"
-            underline="hover"
-          >
-            Terms and Conditions
-          </Typography>
-          <Typography
-            variant="subtitle2"
-            color="secondary"
-            component={Link}
-            href="https://mui.com/legal/privacy/"
-            target="_blank"
-            underline="hover"
-          >
-            Privacy Policy
-          </Typography>
-        </Stack>
       </Stack>
     </Container>
   );

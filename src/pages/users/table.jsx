@@ -14,33 +14,25 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-// third-party
-import { NumericFormat } from 'react-number-format';
-
 // project imports
 import Dot from 'components/@extended/Dot';
 
+// ==============================|| TABLE HEAD ||============================== //
+
 const headCells = [
-  { id: 'UserID', align: 'left', disablePadding: false, label: 'User ID' },
-  { id: 'UserName', align: 'left', disablePadding: true, label: 'Username' },
-  { id: 'DisplayName', align: 'left', disablePadding: false, label: 'Display Name' },
-  { id: 'IsActive', align: 'center', disablePadding: false, label: 'Status' },
-  { id: 'Email', align: 'left', disablePadding: false, label: 'Email' }
+  { id: 'UserID', align: 'left', label: 'User ID' },
+  { id: 'Username', align: 'left', label: 'Username' },
+  { id: 'Name', align: 'left', label: 'Full Name' },
+  { id: 'IsActive', align: 'center', label: 'Status' },
+  { id: 'Email', align: 'left', label: 'Email' }
 ];
 
-// ==============================|| ORDER TABLE - HEADER ||============================== //
-
-function OrderTableHead({ order, orderBy }) {
+function TableHeader() {
   return (
     <TableHead>
       <TableRow>
         {headCells.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align={headCell.align}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
+          <TableCell key={headCell.id} align={headCell.align}>
             {headCell.label}
           </TableCell>
         ))}
@@ -48,11 +40,6 @@ function OrderTableHead({ order, orderBy }) {
     </TableHead>
   );
 }
-
-OrderTableHead.propTypes = {
-  order: PropTypes.string,
-  orderBy: PropTypes.string
-};
 
 // ==============================|| USER STATUS DOT ||============================== //
 
@@ -72,21 +59,19 @@ UserStatus.propTypes = {
   status: PropTypes.bool
 };
 
-// ==============================|| ORDER TABLE COMPONENT ||============================== //
+// ==============================|| MAIN COMPONENT ||============================== //
 
 export default function OrderTable() {
   const [users, setUsers] = useState([]);
-  const order = 'asc';
-  const orderBy = 'UserID';
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://dcr.api.rentmanager.com/users', {
+        const response = await axios.get('https://dcr.api.rentmanager.com/users', {
           headers: {
-            'Accept': 'application/json',
-            'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // Replace with actual token
-            'X-RM12Api-Version': '1.0.0'
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'X-RM12Api-ApiToken': '-NMpair_ca076ad71a014487914e16001723e564XX6Bm9PZtnlasDxBexpGiOWS2U4YfYgYovBnP1ly94LwCJPcIecwMvn-9vPNAf6apLbfoYKc6iwSO-qGAE4uevv3ZLrKqWs2ivveId7o=',
           }
         });
         setUsers(response.data);
@@ -100,30 +85,21 @@ export default function OrderTable() {
 
   return (
     <Box>
-      <TableContainer
-        sx={{
-          width: '100%',
-          overflowX: 'auto',
-          position: 'relative',
-          display: 'block',
-          maxWidth: '100%',
-          '& td, & th': { whiteSpace: 'nowrap' }
-        }}
-      >
+      <TableContainer sx={{ width: '100%', overflowX: 'auto' }}>
         <Table aria-labelledby="tableTitle">
-          <OrderTableHead order={order} orderBy={orderBy} />
+          <TableHeader />
           <TableBody>
-            {users.map((user, index) => (
+            {users.map((user) => (
               <TableRow key={user.UserID} hover tabIndex={-1}>
-                <TableCell component="th" scope="row">
+                <TableCell>
                   <Link color="secondary">{user.UserID}</Link>
                 </TableCell>
-                <TableCell>{user.UserName}</TableCell>
-                <TableCell>{user.DisplayName}</TableCell>
+                <TableCell>{user.Username || '-'}</TableCell>
+                <TableCell>{user.Name || '-'}</TableCell>
                 <TableCell align="center">
                   <UserStatus status={user.IsActive} />
                 </TableCell>
-                <TableCell>{user.Email}</TableCell>
+                <TableCell>{user.Email || '-'}</TableCell>
               </TableRow>
             ))}
           </TableBody>

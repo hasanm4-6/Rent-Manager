@@ -44,9 +44,9 @@ const MainRoutes = {
       path: 'users',
       element: <Users />
     },
-    { 
-      path: 'users/:id', 
-      element: <UserDetail /> 
+    {
+      path: 'users/:id',
+      element: <UserDetail />
     },
     {
       path: 'tenants',
